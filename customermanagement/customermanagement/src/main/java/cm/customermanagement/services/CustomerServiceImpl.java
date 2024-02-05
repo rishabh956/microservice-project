@@ -16,10 +16,19 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	CustomerServiceDoa customerServiceDoa ;
 	
+	CustomerServiceImpl(CustomerServiceDoa customerRepo)
+	{
+		this.customerServiceDoa = customerRepo ;
+	}
+	
 	@Override
-	public Customer addCustomer(Customer cust) {
+	public Customer addCustomer(Customer cust) throws CustomerNotFound {
 		// TODO Auto-generated method stub
+		if(!customerServiceDoa.isCustomerExistByName(cust.getFirstName()))
 		return customerServiceDoa.save(cust);
+		else
+			throw new CustomerNotFound() ;
+		
 	}
 
 	@Override

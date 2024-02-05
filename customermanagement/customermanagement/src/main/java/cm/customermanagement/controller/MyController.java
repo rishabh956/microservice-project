@@ -46,12 +46,14 @@ public class MyController {
 //			cust.setEmail(custTemp.getEmail());
 //			cust.setDOB(custTemp.getDOB());
 			cust = custTemp ;
+			return this.customerService.addCustomer(cust);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			return null ;
 		}
-		return this.customerService.addCustomer(cust);
+		
 	}
 	
 	@DeleteMapping("/customer/delete/{customerId}")

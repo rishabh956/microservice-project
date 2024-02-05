@@ -7,7 +7,7 @@ import cm.customermanagement.exceptions.CustomerNotFound;
 
 public interface CustomerService {
 	
-	public Customer addCustomer(Customer cust);
+	public Customer addCustomer(Customer cust) throws CustomerNotFound;;
 	public void deleteCustomer(Long id) throws CustomerNotFound;
 	public List<Customer> getAllCustomer();
 
