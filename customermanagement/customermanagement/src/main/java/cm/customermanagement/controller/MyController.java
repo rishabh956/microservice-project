@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,6 +26,11 @@ public class MyController {
 	@Autowired
 	CustomerService customerService ;
 	
+	public MyController(CustomerService customerServiceD)
+	{
+		this.customerService = customerServiceD ;
+	}
+	
 	
 	@GetMapping("/customer/getAllCustomer")
 	List<Customer> getAllCustomer()
@@ -33,7 +39,7 @@ public class MyController {
 	}
 	
 	@PostMapping("/customer/add")
-	Customer addCustomer(@RequestBody String jsonData)
+	ResponseEntity<Customer> addCustomer(@RequestBody String jsonData)
 	{
 		Customer cust = new Customer() ;
 		try {
@@ -46,12 +52,13 @@ public class MyController {
 //			cust.setEmail(custTemp.getEmail());
 //			cust.setDOB(custTemp.getDOB());
 			cust = custTemp ;
-			return this.customerService.addCustomer(cust);
+			Customer savedCustomer = this.customerService.addCustomer(cust);
+			return new ResponseEntity<>(savedCustomer,HttpStatus.OK);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			return null ;
+			return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
 		}
 		
 	}

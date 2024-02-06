@@ -20,7 +20,7 @@ public class CustomerServiceDaoTest {
 	@Test
 	void isCustomerExistByName()
 	{
-		Customer cust = new Customer("anumeha","singh","arjun@gmail.com","7845",new Date(2011-11-7));
+		Customer cust = new Customer("anumeha","singh","anumeha@gmail.com","7845",new Date(2011-11-7));
 		customerServiceDoa.save(cust);
 		
 		Boolean actualResult = customerServiceDoa.isCustomerExistByName("anumeha");
@@ -31,13 +31,15 @@ public class CustomerServiceDaoTest {
 	@Test
 	void isCustomerExistByNameFalse()
 	{
-		Customer cust = new Customer("anumeha","singh","arjun@gmail.com","7845",new Date(2011-11-7));
+		Customer cust = new Customer("anumeha","singh","anumeha@gmail.com","7845",new Date(2011-11-7));
 		customerServiceDoa.save(cust);
 		
 		Boolean actualResult = customerServiceDoa.isCustomerExistByName("ritik");
 		
 		assertThat(actualResult).isFalse();
 	}
+	
+	
 	
 	
 	
